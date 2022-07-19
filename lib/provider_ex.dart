@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
 
     var data = MyModel();
 
-    return Provider(
+    return ChangeNotifierProvider(
       create: (BuildContext context) {
         return data;
       },
@@ -63,10 +63,16 @@ class MyApp extends StatelessWidget {
 }
 
 
-class MyModel {
+class MyModel extends ChangeNotifier {
   String text = "Hello";
 
   void doSomething() {
-    text = "World";
+    if (text == "Hello") {
+      text = "World";
+    } else {
+      text = "Hello";
+    }
+
+    notifyListeners();
   }
 }
